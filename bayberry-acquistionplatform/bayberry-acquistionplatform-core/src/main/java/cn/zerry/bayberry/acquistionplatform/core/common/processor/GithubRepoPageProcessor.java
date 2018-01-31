@@ -1,4 +1,4 @@
-package cn.terry.acquistionplatform.common.processor;
+package cn.zerry.bayberry.acquistionplatform.core.common.processor;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
