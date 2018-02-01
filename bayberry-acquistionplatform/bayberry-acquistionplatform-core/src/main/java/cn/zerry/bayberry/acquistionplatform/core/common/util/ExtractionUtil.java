@@ -26,8 +26,8 @@ public class ExtractionUtil {
      * @param end
      * @return
      */
-    public void extractByEnds(Html html, String front, String end){
-        Selectable selectable = html.regex(front + "(.*?)" + end);
+    public String extractByEnds(Html html, String front, String end){
+        return html.regex(front + "(.*?)" + end).get();
     }
 
     /**
