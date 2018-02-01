@@ -11,6 +11,7 @@
     <modules>
         <module>bayberry-api</module>
         <module>bayberry-base</module>
+        <module>bayberry-db</module>
         <module>bayberry-common</module>
         <module>bayberry-acquistionplatform</module>
         <module>bayberry-alarm</module>
