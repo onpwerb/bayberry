@@ -11,11 +11,13 @@
     <artifactId>bayberry-acquistionplatform-web</artifactId>
 
     <dependencies>
+        <!-- module -->
         <dependency>
             <groupId>cn.zerry</groupId>
             <artifactId>bayberry-acquistionplatform-core</artifactId>
             <version>1.0.0</version>
         </dependency>
+
     </dependencies>
     
 </project>
