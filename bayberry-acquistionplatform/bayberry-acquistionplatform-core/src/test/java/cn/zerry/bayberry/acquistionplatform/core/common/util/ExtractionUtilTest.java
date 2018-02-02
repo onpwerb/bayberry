@@ -6,6 +6,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import us.codecraft.webmagic.selector.Html;
 
+import java.util.List;
+import java.util.regex.Pattern;
+
 /**
  * @author linzengrui
  * @Description TODO
@@ -17,10 +20,50 @@ public class ExtractionUtilTest {
     @Test
     public void extractByEnds() throws Exception{
         ExtractionUtil extractionUtil = new ExtractionUtil();
-        String s = extractionUtil.extractByEnds(new Html(html), "<head>", "</head>");
+        String s = extractionUtil.extractByEnds(new Html(html), "head", "/head");
         System.out.println(s);
     }
 
+    private String html2 = "\n" +
+            "<html>" +
+            "<head></head>" +
+            "<body>" +
+            "<title>test</title>"+
+            "aaaaa" +
+            "\n" +
+            "2018-03-03 12:02:01" +
+            "\n" +
+            "20174444"+
+            "</body" +
+            "</html>";
+
+    @Test
+    public void extractByBody() throws Exception{
+        System.out.println("*********** first ************");
+        String regExp2 = "([2][0][0-9]{2})-([0][1-9]|[1][0-2])-([0][1-9]|[1-2][0-9]|[3][0-1])\\s([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])";
+        String date = "2018-02-01 12:12:12";
+        System.out.println(Pattern.compile(regExp2).matcher(date).matches());
+        System.out.println("******************************");
+
+        ExtractionUtil extractionUtil = new ExtractionUtil();
+        String s = extractionUtil.extractByBody(new Html(html2), 0);
+        String s2 = extractionUtil.extractByBody(new Html(html2), 2);
+
+        String regExp = "([2][0][0-9]{2}-([0][1-9]|[1][0-2])-([0][1-9]|[1-2][0-9]|[3][0-1])\\s([0-1][0-9]|[2][0-3]):[0-5][0-9]:[0-5][0-9])";
+        List<String> all = new Html(html2).regex(regExp).all();
+
+        System.out.println("*********** second ***********");
+        System.out.println(s);
+        System.out.println(s2);
+
+        System.out.println("******************************");
+        System.out.println("*********** third ************");
+
+        System.out.println(all);
+        System.out.println(all.size());
+        System.out.println("******************************");
+
+    }
 
 
     private String html = "\n" +

@@ -1,16 +1,6 @@
 package cn.zerry.bayberry.acquistionplatform.core.common.util;
 
-import org.assertj.core.util.Lists;
-import us.codecraft.webmagic.ResultItems;
-import us.codecraft.webmagic.Site;
-import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.configurable.ConfigurablePageProcessor;
-import us.codecraft.webmagic.configurable.ExpressionType;
-import us.codecraft.webmagic.configurable.ExtractRule;
 import us.codecraft.webmagic.selector.Html;
-import us.codecraft.webmagic.selector.Selectable;
-
-import java.util.List;
 
 /**
  * @author linzengrui
@@ -40,20 +30,38 @@ public class ExtractionUtil {
     /**
      * 正文截取
      */
-    public String extractByBody(){
-        return null;
+    public String extractByBody(Html html, int type){
+        String result = null;
+        switch (type){
+            //文章标题
+            case 0 :
+                //查找<title>标签
+                result = html.$("title").get();
+                break;
+            //文章内容
+            case 1 :
+                //todo
+                break;
+            //发布时间
+            case 2 :
+                //查找 YYYY-MM-DD HH:mm:dd 格式
+                String regExp = "([2][0][0-9]{2}-([0][1-9]|[1][0-2])-([0][1-9]|[1-2][0-9]|[3][0-1])\\s([0-1][0-9]|[2][0-3]):[0-5][0-9]:[0-5][0-9])";
+                result = html.regex(regExp).get();
+                break;
+            //其他
+            default:
+                //todo
+                break;
+        }
+
+        return result;
     }
 
     /**
      * XPath提取
      */
-    public String extractByXPath(){
-        List<ExtractRule> extractRules = Lists.newArrayList();
-        ExtractRule extractRule = new ExtractRule();
-        extractRule.setExpressionType(ExpressionType.XPath);
-        extractRules.add(extractRule);
+    public String extractByXPath(Html html, String xpath){
 
-        Spider.create(new ConfigurablePageProcessor(Site.me(), extractRules));
 
 
         return null;
@@ -62,7 +70,7 @@ public class ExtractionUtil {
     /**
      * JSON提取
      */
-    public String extractByJSON(){
+    public String extractByJSON(Html html, String expressionValue){
         return null;
     }
 
