@@ -41,11 +41,13 @@ public class ExtractionUtil {
             //文章内容
             case 1 :
                 //todo
+                result = html.$("div.article").get();
                 break;
             //发布时间
             case 2 :
                 //查找 YYYY-MM-DD HH:mm:dd 格式
-                String regExp = "([2][0][0-9]{2}-([0][1-9]|[1][0-2])-([0][1-9]|[1-2][0-9]|[3][0-1])\\s([0-1][0-9]|[2][0-3]):[0-5][0-9]:[0-5][0-9])";
+//                String regExp = "([2][0][0-9]{2}-([0][1-9]|[1][0-2])-([0][1-9]|[1-2][0-9]|[3][0-1])\\s([0-1][0-9]|[2][0-3]):[0-5][0-9]:[0-5][0-9])";
+                String regExp = "([1-2][0-9]{3}[\\-|\\.][0-1]?[0-9][\\-|\\.][0-3]?[0-9](\\s+)([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9])";
                 result = html.regex(regExp).get();
                 break;
             //其他
@@ -61,8 +63,6 @@ public class ExtractionUtil {
      * XPath提取
      */
     public String extractByXPath(Html html, String xpath){
-
-
 
         return null;
     }

@@ -48,6 +48,7 @@ public class ExtractionUtilTest {
         ExtractionUtil extractionUtil = new ExtractionUtil();
         String s = extractionUtil.extractByBody(new Html(html2), 0);
         String s2 = extractionUtil.extractByBody(new Html(html2), 2);
+        String s3 = extractionUtil.extractByBody(new Html(article), 1);
 
         String regExp = "([2][0][0-9]{2}-([0][1-9]|[1][0-2])-([0][1-9]|[1-2][0-9]|[3][0-1])\\s([0-1][0-9]|[2][0-3]):[0-5][0-9]:[0-5][0-9])";
         List<String> all = new Html(html2).regex(regExp).all();
@@ -62,8 +63,181 @@ public class ExtractionUtilTest {
         System.out.println(all);
         System.out.println(all.size());
         System.out.println("******************************");
+        System.out.println("*********** fourth ***********");
+        System.out.println(s3);
+        System.out.println("******************************");
 
     }
+
+    private String article = "<!--正文-->\n" +
+            "<div class=\"section\">\n" +
+            "    <!--正文中间-->\n" +
+            "    <div class=\"detail_cnt clear-fix\">\n" +
+            "        <div class=\"main_content\">\n" +
+            "            <!--文章-->\n" +
+            "            <div class=\"article\">\n" +
+            "                <div class=\"detail_left  clear-fix\">\n" +
+            "                    <div class=\"detail_left_cnt\">\n" +
+            "\n" +
+            "                        <div class=\"J-title_detail title_detail\">\n" +
+            "                            <h1><span> 国家互联网信息办公室公布《微博客信息服务管理规定》</span></h1>\n" +
+            "\n" +
+            "                            <div class=\"share_cnt_p clearfix\">\n" +
+            "                                <div class=\"fl\">\n" +
+            "                                    <i>2018-02-03 10:18</i>\n" +
+            "                                    <a href=\"javascript:;\">中国青年网</a>\n" +
+            "                                </div>\n" +
+            "                            </div>\n" +
+            "                        </div>\n" +
+            "                        <!-- <div class=\"ad_space as_title\">\n" +
+            "                            <script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/avnexsekk.js\"></script>\n" +
+            "                        </div> -->\n" +
+            "                        <div class=\"ave_20170908\">\n" +
+            "                            <ul class=\"ave_items\">\n" +
+            "                                <li class=\"ave_item\"><span></span><a href=\"/index/scan\" target=\"_blank\" >中青看点发红包中，赶紧领取！</a></li>\n" +
+            "                                <li class=\"ave_item\"><span></span><a href=\"/index/scan\" target=\"_blank\">现在发放1-10元红包，限时领取！</a>\n" +
+            "                                </li>\n" +
+            "                            </ul>\n" +
+            "                        </div>\n" +
+            "                        <div class=\"J-contain_detail_cnt contain_detail_cnt\" id=\"infodata\">\n" +
+            "                            <p>　　国家互联网信息办公室2月2日公布《微博客信息服务管理规定》(以下简称《规定》)。该《规定》自3月20日起施行。国家互联网信息办公室有关负责人表示，出台《规定》旨在促进微博客信息服务健康有序发展，保护公民、法人和其他组织的合法权益，维护国家安全和公共利益。</p><p>　　国家互联网信息办公室相关负责人介绍，国家互联网信息办公室依据《中华人民共和国网络安全法》等相关法律法规制定本《规定》。《规定》共十八条，包括微博客服务提供者主体责任、真实身份信息认证、分级分类管理、辟谣机制、行业自律、社会监督及行政管理等条款。</p><p>　　《规定》明确，国家互联网信息办公室负责全国微博客信息服务的监督管理执法工作。地方互联网信息办公室依据职责负责本行政区域内的微博客信息服务的监督管理执法工作。</p><p>　　《规定》强调，微博客服务提供者应当落实信息内容安全管理主体责任，建立健全各项管理制度，具有安全可控的技术保障和防范措施，配备与服务规模相适应的管理人员。</p><p>　　《规定》提出，各级党政机关、企事业单位、人民团体和新闻媒体等组织机构对所开设的前台实名认证账号发布的信息内容及其跟帖评论负有管理责任。微博客服务提供者应当提供管理权限等必要支持。</p><p>　　国家互联网信息办公室相关负责人强调，微博客服务提供者应当按照《规定》要求，切实履行职责和义务，自觉接受社会公众和行业监督，积极营造清朗的网络空间。</p><p>来源：中国网信网</p><p><br/></p>                        </div>\n" +
+            "                    </div>\n" +
+            "\n" +
+            "                    <!--正文广告位-->\n" +
+            "                    <div class=\"\" style=\"text-align:center;padding:20px 0;\">\n" +
+            "                        <script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/ezribwirw.js\"></script>\n" +
+            "                    </div>\n" +
+            "\n" +
+            "                    <div class=\"pagination\">\n" +
+            "                        <a href='javascript:;' class='cur'>1</a> <a href=\"/index/lists?type=25\">2</a><a href=\"/index/lists?type=25\">下一页</a>                    </div>\n" +
+            "\n" +
+            "                    <!--正文广告位-->\n" +
+            "                    <div class=\"ad_space as_zw\">\n" +
+            "                        <script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/dyqhavhxh.js\"></script>\n" +
+            "                    </div>\n" +
+            "\n" +
+            "                </div>\n" +
+            "            </div>\n" +
+            "            <!--正文左侧-->\n" +
+            "            <div class=\"aside\" id=\"sort_area\">\n" +
+            "                <div class=\"detail_right_cnt clear-fix\" id=\"sort_scroll\">\n" +
+            "                    <div class=\"ad_space_left\">\n" +
+            "                        <div class=\"ad_space_left_box\">\n" +
+            "                            <script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/fasjcxpjb.js\"></script>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "\n" +
+            "                    <div class=\"xfcnt_lft clear-fix\">\n" +
+            "                        <div class=\"main_r_title\">\n" +
+            "                            <h4><span><em></em>今日热点</span></h4>\n" +
+            "                        </div>\n" +
+            "                        <div class=\"main_item_cnt\">\n" +
+            "                            <ul id=\"hot_daily\" class=\"sift_item\">\n" +
+            "                                <li id=\"list1\">\n" +
+            "                                    <a title=\"玩转中青看点APP 月入2万不是梦 新用户送红包！\" href=\"https://kandian.youth.cn/index/scan\" updata=\"detail|shoutu|2|0\" target=\"_blank\" class=\"news_pic\">  <span><img class=\"animation  scrollLoading\" src=\"https://res.youth.cn/201801_13_13l_5a59c141a98ff.jpg\" alt=\"玩转中青看点APP 月入2万不是梦 新用户送红包！\"></span><p>玩转中青看点APP 月入2万不是梦 新用户送红包！</p></a>\n" +
+            "                                </li>\n" +
+            "                                <li id=\"list2\">\n" +
+            "                                    <script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/lgypidddf.js\"></script>\n" +
+            "                                </li>\n" +
+            "                                <li id=\"list3\">\n" +
+            "                                    <script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/niarkfffk.js\"></script>\n" +
+            "                                </li>\n" +
+            "                            </ul>\n" +
+            "                        </div>\n" +
+            "\n" +
+            "                        <div class=\"ad_space_left\">\n" +
+            "                            <div class=\"ad_space_left_box\">\n" +
+            "                                <script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/dyqhavnnu.js\"></script>\n" +
+            "                            </div>\n" +
+            "                        </div>\n" +
+            "\n" +
+            "                        <div class=\"main_r_title\">\n" +
+            "                            <h4><span><em></em>热门排行</span></h4>\n" +
+            "                        </div>\n" +
+            "                        <div class=\"main_item_cnt\" id=\"unartificial\">\n" +
+            "                            <!-- xcp_v1 -->\n" +
+            "                            <ul class=\"icp_items\" id=\"hot_daily2\"></ul>\n" +
+            "                        </div>\n" +
+            "                        <div class=\"ad_space_left\">\n" +
+            "                            <div class=\"ad_space_left_box\">\n" +
+            "                                <script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/fasjcxppz.js\"></script>\n" +
+            "                            </div>\n" +
+            "                        </div>\n" +
+            "                        <div class=\"ad_space_left\">\n" +
+            "                            <div class=\"ad_space_left_box\">\n" +
+            "                                <script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/idvmfasvf.js\"></script>\n" +
+            "                            </div>\n" +
+            "                        </div>\n" +
+            "\n" +
+            "\n" +
+            "\n" +
+            "                        <!--大家说-->\n" +
+            "                        <div class=\"main_r_title all_see\">\n" +
+            "                            <h4><span><em></em>大家在领</span></h4>\n" +
+            "                        </div>\n" +
+            "                        <div class=\"main_item_cnt\" id=\"all_see\" style=\"height:auto;\">\n" +
+            "                            <!-- xcp_v1 -->\n" +
+            "                            <div>\n" +
+            "                                <img src=\"https://res.youth.cn/201801_12_12u_5a58905b16350.jpg\">\n" +
+            "                            </div>\n" +
+            "\n" +
+            "                        </div>\n" +
+            "                        <div class=\"ad_space_left\">\n" +
+            "                            <div class=\"ad_space_left_box\">\n" +
+            "                                <script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/jewngbtag.js\"></script>\n" +
+            "                            </div>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                </div>\n" +
+            "            </div>\n" +
+            "            <!--热门推荐-->\n" +
+            "            <div class=\"bottom_over_cnt\">\n" +
+            "                <div class=\"ad_space_title ad2\">\n" +
+            "                    <div class=\"pic_item_title\"></div>\n" +
+            "                    <div class=\"pic_item_title\"></div>\n" +
+            "                    <div class=\"pic_item_title\"></div>\n" +
+            "                    <div class=\"pic_item_title\"></div>\n" +
+            "                    <div class=\"clear\"></div>\n" +
+            "                </div>\n" +
+            "\n" +
+            "                <div class=\"guess_like  clear-fix bottom_cns\" id=\"recoos\">\n" +
+            "                    <!-- xcp_v2 热门推荐宽窄 -->\n" +
+            "                    <div class=\"rec_cns\">\n" +
+            "                        <div class=\"rec_hot\" id=\"rec_hot\">\n" +
+            "                            <div class=\"rec_til\">推荐</div>\n" +
+            "                            <ul class=\"rec_cnt\">\n" +
+            "                                <li><a href=\"/index/lists?type=25\" target=\"_blank\">热点</a></li><li><a href=\"/index/lists?type=6\" target=\"_blank\">要闻</a></li><li><a href=\"/index/lists?type=19\" target=\"_blank\">娱乐</a></li><li><a href=\"/index/lists?type=3\" target=\"_blank\">健康</a></li><li><a href=\"/index/lists?type=2\" target=\"_blank\">美文</a></li><li><a href=\"/index/lists?type=7\" target=\"_blank\">笑话</a></li><li><a href=\"/index/lists?type=8\" target=\"_blank\">育儿</a></li><li><a href=\"/index/lists?type=12\" target=\"_blank\">美食</a></li><li><a href=\"/index/lists?type=11\" target=\"_blank\">财经</a></li><li><a href=\"/index/lists?type=10\" target=\"_blank\">科技</a></li><li><a href=\"/index/lists?type=14\" target=\"_blank\">旅游</a></li><li><a href=\"/index/lists?type=17\" target=\"_blank\">时尚</a></li><li><a href=\"/index/lists?type=13\" target=\"_blank\">汽车</a></li>                            </ul>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                    <div class=\"hotrec_cns\" id=\"hotrec_cns\">\n" +
+            "                        <div id=\"rmtj_title\" class=\"guess_title hot-recommend\"><span>热门推荐<i></i></span></div>\n" +
+            "                        <div id=\"hot_recommend_cnt\" class=\"hot_recommend_cnt clear-fix\">\n" +
+            "                            <ul class=\"tjnewsrcontent\" id=\"hot_daily3\">\n" +
+            "                                <li id=\"ad1\">\n" +
+            "                                    <div style=\"padding:10px 0;\"><script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/lgypiddfd.js\"></script></div>\n" +
+            "                                </li>\n" +
+            "                                <li id=\"ad2\">\n" +
+            "                                    <div style=\"padding:10px 0;\"><script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/niarkffhj.js\"></script></div>\n" +
+            "                                </li>\n" +
+            "                                <li id=\"ad3\">\n" +
+            "                                    <div style=\"padding:10px 0;\"><script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/ojbslggil.js\"></script></div>\n" +
+            "                                </li>\n" +
+            "                            </ul>\n" +
+            "                        </div>\n" +
+            "                        <div class=\"see_more\"><a class=\"see_hf\" href=\"/index/lists?type=25\" target=\"_blank\"><span class=\"see_txt\">查看更多精彩</span></a></div>\n" +
+            "                        <div style=\"padding-top:15px;\">\n" +
+            "                            <script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/ezribwibf.js\"></script>\n" +
+            "                            <script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/ezribwofa.js\"></script>\n" +
+            "                        </div>\n" +
+            "                        <div>\n" +
+            "                            <script type=\"text/javascript\" src=\"//jiaoben.hotkd.com/cxpgzumgt.js\"></script>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                </div>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "    </div>\n" +
+            "</div>\n";
 
 
     private String html = "\n" +
