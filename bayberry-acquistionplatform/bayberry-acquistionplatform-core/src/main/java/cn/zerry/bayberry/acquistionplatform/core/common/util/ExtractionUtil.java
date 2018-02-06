@@ -2,6 +2,8 @@ package cn.zerry.bayberry.acquistionplatform.core.common.util;
 
 import us.codecraft.webmagic.selector.Html;
 
+import java.util.List;
+
 /**
  * @author linzengrui
  * @Description 提取方式api
@@ -23,8 +25,8 @@ public class ExtractionUtil {
     /**
      * 正则截取
      */
-    public String extractByRegular(){
-        return null;
+    public List<String> extractByRegular(Html html, String arg){
+        return html.regex(arg).all();
     }
 
     /**

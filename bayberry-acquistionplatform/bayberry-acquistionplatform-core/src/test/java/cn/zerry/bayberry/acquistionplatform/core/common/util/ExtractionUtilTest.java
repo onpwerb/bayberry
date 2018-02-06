@@ -24,6 +24,14 @@ public class ExtractionUtilTest {
         System.out.println(s);
     }
 
+    @Test
+    public void extractByRegular() throws Exception{
+        ExtractionUtil extractionUtil = new ExtractionUtil();
+        List<String> list = extractionUtil.extractByRegular(new Html(html2), "title");
+        Html html = new Html(html2);
+        System.out.println(html.regex("test").all());
+    }
+
     private String html2 = "\n" +
             "<html>" +
             "<head></head>" +
