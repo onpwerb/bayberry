@@ -2,20 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <parent>
-        <artifactId>bayberry</artifactId>
         <groupId>cn.zerry</groupId>
+        <artifactId>bayberry-alarm</artifactId>
         <version>1.0.0</version>
     </parent>
+    <artifactId>bayberry-alarm-base</artifactId>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bayberry-alarm</artifactId>
 
-    <modules>
-        <module>bayberry-alarm-web</module>
-        <module>bayberry-alarm-base</module>
-        <module>bayberry-alarm-api</module>
-        <module>bayberry-alarm-sender</module>
-        <module>bayberry-alarm-server</module>
-    </modules>
+    
 </project>
