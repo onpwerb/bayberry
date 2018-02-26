@@ -18,4 +18,20 @@
         <module>bayberry-alarm-sender</module>
         <module>bayberry-alarm-server</module>
     </modules>
+
+    <dependencies>
+        <!-- module -->
+        <dependency>
+            <groupId>cn.zerry</groupId>
+            <artifactId>bayberry-base</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!-- spring boot web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+
+    </dependencies>
 </project>
