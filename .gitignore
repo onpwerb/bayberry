@@ -20,4 +20,6 @@ bayberry-sync/target/
 bayberry-ui/target/
 bayberry-zpush/target/
 bayberry-zshop/target/
+bayberry-zcloud/target/
+bayberry-zcloud/bayberry-zcloud-eureka/target/
 /README.md
