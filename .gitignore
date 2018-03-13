@@ -19,6 +19,7 @@ bayberry-search/target/
 bayberry-sync/target/
 bayberry-ui/target/
 bayberry-zpush/target/
+bayberry-zpush/dependency-reduced-pom.xml
 bayberry-zshop/target/
 bayberry-zcloud/target/
 bayberry-zcloud/bayberry-zcloud-eureka/target/
