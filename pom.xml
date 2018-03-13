@@ -17,6 +17,7 @@
         <module>bayberry-alarm</module>
         <module>bayberry-admin</module>
         <module>bayberry-zpush</module>
+        <module>bayberry-ztest</module>
         <module>bayberry-ui</module>
         <module>bayberry-cms</module>
         <module>bayberry-loganalysis</module>
