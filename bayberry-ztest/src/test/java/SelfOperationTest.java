@@ -29,14 +29,15 @@ public class SelfOperationTest {
 
         System.setProperty(driver, path);
         WebDriver dr = new ChromeDriver();
-//        dr.manage().window().maximize();
+        dr.manage().window().maximize();
 
+        //登录
         login(dr, loginUrl);
-
+        //进入 数据建模
         index(dr, searchUrl);
-
+        //选取表
         analyse(dr, indexUrl);
-
+        //自运算
         autocompete(dr, indexUrl);
 
 //        quit(dr);
@@ -118,13 +119,43 @@ public class SelfOperationTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //获取当前焦点
-        dr.get(url);
-        //切换到弹窗
-//        dr.switchTo().window("")
         //点击 分组字段按钮
-        dr.findElement(By.className("group-add-btn")).click();
-
+        dr.findElement(By.xpath("//a[@class='group-add-btn']")).click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //点击全选按钮
+        dr.findElement(By.xpath("//a[@class='group-check']")).click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //点击确定按钮
+        dr.findElement(By.xpath("//a[@id='group-showbsave']")).click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //点击 统计字段下拉框
+        dr.findElements(By.xpath("//span[@class='textbox-addon textbox-addon-right']")).get(1).click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //鼠标选择 第一个 选项
+        dr.findElement(By.className("combobox-item")).click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //点击 确定
+        dr.findElement(By.className("calc-sure")).click();
 
     }
 
