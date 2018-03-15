@@ -76,7 +76,7 @@ public class SelfOperationTest {
 
     public static void index(WebDriver dr, String url){
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -86,7 +86,7 @@ public class SelfOperationTest {
 
     public static void analyse(WebDriver dr, String url){
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -104,7 +104,7 @@ public class SelfOperationTest {
                 .perform();
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -115,7 +115,7 @@ public class SelfOperationTest {
 
     public static void autocompete(WebDriver dr, String url){
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -129,33 +129,43 @@ public class SelfOperationTest {
         //点击全选按钮
         dr.findElement(By.xpath("//a[@class='group-check']")).click();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         //点击确定按钮
         dr.findElement(By.xpath("//a[@id='group-showbsave']")).click();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         //点击 统计字段下拉框
         dr.findElements(By.xpath("//span[@class='textbox-addon textbox-addon-right']")).get(1).click();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         //鼠标选择 第一个 选项
         dr.findElement(By.className("combobox-item")).click();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         //点击 确定
         dr.findElement(By.className("calc-sure")).click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //获取结果集
+//        String text = dr.findElement(By.xpath("//td[@field='count']")).getText();
+        String text = dr.findElement(By.xpath("//div[@class='datagrid-cell datagrid-cell-c3-count']")).getText();
+        assert text.equals("1") : "Test failed!";
+        System.out.println("Test passed!");
 
     }
 
