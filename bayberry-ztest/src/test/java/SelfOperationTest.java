@@ -38,7 +38,9 @@ public class SelfOperationTest {
         //选取表
         analyse(dr, indexUrl);
         //自运算
-        autocompete(dr, indexUrl);
+        autocompete(dr);
+        //移除临时表，清除画布
+        clean(dr);
 
 //        quit(dr);
 
@@ -113,7 +115,7 @@ public class SelfOperationTest {
 
     }
 
-    public static void autocompete(WebDriver dr, String url){
+    public static void autocompete(WebDriver dr){
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
@@ -165,7 +167,39 @@ public class SelfOperationTest {
 //        String text = dr.findElement(By.xpath("//td[@field='count']")).getText();
         String text = dr.findElement(By.xpath("//div[@class='datagrid-cell datagrid-cell-c3-count']")).getText();
         assert text.equals("1") : "Test failed!";
-        System.out.println("Test passed!");
+//        System.out.println("Test passed!");
+    }
+
+    public static void clean(WebDriver dr){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //移除画布
+        //点击 移除
+        dr.findElement(By.className("delete")).click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //点击确定
+        dr.findElement(By.xpath("//a[@class='layui-layer-btn0']")).click();
+
+
+        //清除临时表
+        int size = dr.findElements(By.cssSelector(".analyse-common-dl.temptb >dd")).size();
+        for(int i = 0; i < size; i++){
+            dr.findElement(By.cssSelector(".analyse-common-dl.temptb >dd")).click();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            dr.findElement(By.cssSelector(".temptb >dd >i")).click();
+        }
 
     }
 

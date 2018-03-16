@@ -109,6 +109,11 @@ public class SimpleOperationTest {
         return dr.findElement(By.xpath(name)).getText();
     }
 
+    //获取元素个数
+    public static int sum(WebDriver dr, String name){
+        return dr.findElements(By.cssSelector(name)).size();
+    }
+
     @Test
     public void test(){
         System.setProperty(driver, path);
@@ -195,28 +200,21 @@ public class SimpleOperationTest {
 
     public static void clean(WebDriver dr){
         wait(1000);
-        //清除临时表
-//        new Actions(dr)
-//                .moveToElement(dr.findElement(By.xpath("//div[@class='t-item']")))
-//                .moveToElement(dr.findElement(By.xpath("//i[@title='删除']")))
-//                .click();
-
-//        List<WebElement> elements = dr.findElements(By.xpath("//i[@title='删除']"));
-//        for (WebElement element : elements){
-//            element.click();
-//        }
 
         //移除画布
         //点击 移除
-//        dr.findElement(By.className("delete")).click();
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        //点击确定
-//        dr.findElement(By.xpath("//a[@class='layui-layer-btn0']")).click();
+        click(dr, "class", "delete");
+        wait(1000);
+        //点击确定
+        click(dr, "xpath", "//a[@class='layui-layer-btn0']");
 
+        //清除临时表
+        int size = sum(dr, ".analyse-common-dl.temptb >dd");
+        for(int i = 0; i < size; i++){
+            click(dr, "CssSelector", ".analyse-common-dl.temptb >dd");
+            wait(1000);
+            click(dr, "CssSelector", ".temptb >dd >i");
+        }
     }
 
 }
