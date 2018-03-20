@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -120,8 +122,10 @@ public class SelfOperationTest {
 
         // 拖动表 fulljoinb 到画布
         WebElement target2 = dr.findElements(By.className("a-c-dd")).get(4);         //第五个表
+        int xOffset = 500;
+        int yOffset = 150;
         new Actions(dr)
-                .dragAndDropBy(target2, 500, 150)
+                .dragAndDropBy(target2, xOffset, yOffset)
                 .perform();
 
         try {
@@ -131,8 +135,8 @@ public class SelfOperationTest {
         }
 
         // 表a 和 表b 关联
-        WebElement tableA = dr.findElement(By.id("v-16"));
-        WebElement tableB = dr.findElement(By.id("v-30"));
+        WebElement tableA = dr.findElements(By.cssSelector(".rotatable")).get(0).findElement(By.className("inPorts"));
+        WebElement tableB = dr.findElements(By.cssSelector(".rotatable")).get(1).findElement(By.className("outPorts"));
         new Actions(dr)
                 .moveToElement(tableB)
                 .clickAndHold(tableB)
@@ -209,7 +213,15 @@ public class SelfOperationTest {
             e.printStackTrace();
         }
         //鼠标选择 第一个 选项
-        dr.findElement(By.id("_easyui_combobox_i7_0")).click();
+        List<WebElement> elements = new ArrayList<>();
+        String anObject = "id(id)";
+        for (WebElement e : dr.findElements(By.className("combobox-item"))){
+            if (e.getAttribute("innerHTML").equals(anObject)){
+                elements.add(e);
+            }
+        }
+        System.out.println(elements.size());
+        elements.get(0).click();
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
@@ -224,7 +236,7 @@ public class SelfOperationTest {
             e.printStackTrace();
         }
         //鼠标选择 第一个 选项
-        dr.findElement(By.id("_easyui_combobox_i8_0")).click();
+        elements.get(1).click();
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
