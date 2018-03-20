@@ -18,9 +18,9 @@ import java.util.Set;
 @ContextConfiguration(locations = {"classpath:spring-core.xml"})
 public class SelfOperationTest {
 
-    private static String loginUrl = "http://localhost:8080/web/query/login";      //登录页面
-    private static String searchUrl = "http://localhost:8080/web/query/search";     //登录成功页面
-    private static String indexUrl = "http://localhost:8080/web/analyse/index";
+    private static String loginUrl = "http://localhost:80/web/query/login";      //登录页面
+    private static String searchUrl = "http://localhost:80/web/query/search";     //登录成功页面
+    private static String indexUrl = "http://localhost:80/web/analyse/index";
 
     @Test
     public void test(){
@@ -35,12 +35,19 @@ public class SelfOperationTest {
         login(dr, loginUrl);
         //进入 数据建模
         index(dr, searchUrl);
+
         //选取表
-        analyse(dr, indexUrl);
+//        analyse(dr, indexUrl);
         //自运算
-        autocompete(dr);
+//        autocompete(dr);
+
+        //两个表关联
+        relate(dr, indexUrl);
+        //全连接
+        fullJoin(dr);
+
         //移除临时表，清除画布
-        clean(dr);
+//        clean(dr);
 
 //        quit(dr);
 
@@ -84,6 +91,149 @@ public class SelfOperationTest {
         }
         dr.get(url);
         dr.findElement(By.linkText("数据建模")).click();
+    }
+
+    public static void relate(WebDriver dr, String url){
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        dr.get(url);
+        dr.findElement(By.className("file-close")).click(); //取第一个元素， 点击"开发专用"下拉框
+
+        // 拖动表 fulljoina 到画布
+        WebElement dest = dr.findElement(By.className("hy-tab-content"));   //画布
+        WebElement target = dr.findElements(By.className("a-c-dd")).get(3);         //第四个表
+        new Actions(dr)
+                .moveToElement(target)
+                .clickAndHold(target)
+                .moveToElement(dest)
+                .release(dest)
+                .perform();
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // 拖动表 fulljoinb 到画布
+        WebElement target2 = dr.findElements(By.className("a-c-dd")).get(4);         //第五个表
+        new Actions(dr)
+                .dragAndDropBy(target2, 500, 150)
+                .perform();
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // 表a 和 表b 关联
+        WebElement tableA = dr.findElement(By.id("v-16"));
+        WebElement tableB = dr.findElement(By.id("v-30"));
+        new Actions(dr)
+                .moveToElement(tableB)
+                .clickAndHold(tableB)
+                .moveToElement(tableA)
+                .release(tableA)
+                .perform();
+
+    }
+
+    public static void fullJoin(WebDriver dr){
+        //停顿
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //选择全连接
+        dr.findElement(By.className("tl-fulljoin")).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //表A 选择表属性
+        dr.findElements(By.className("check-f")).get(0).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //点击全选按钮
+        dr.findElement(By.xpath("//a[@class='group-check']")).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //点击确定按钮
+        dr.findElement(By.xpath("//a[@id='group-checkfs-bsave']")).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //表B 选择表属性
+        dr.findElements(By.className("check-f")).get(1).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //点击全选按钮
+        dr.findElement(By.xpath("//a[@class='group-check']")).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //点击确定按钮
+        dr.findElement(By.xpath("//a[@id='group-checkfs-bsave']")).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //点击 第一个下拉框
+        dr.findElements(By.xpath("//span[@class='textbox-addon textbox-addon-right']")).get(0).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //鼠标选择 第一个 选项
+        dr.findElement(By.id("_easyui_combobox_i7_0")).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //点击 第三个下拉框
+        dr.findElements(By.xpath("//span[@class='textbox-addon textbox-addon-right']")).get(2).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //鼠标选择 第一个 选项
+        dr.findElement(By.id("_easyui_combobox_i8_0")).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //点击 确定按钮
+        dr.findElement(By.className("tb-submit")).click();
+
     }
 
     public static void analyse(WebDriver dr, String url){
