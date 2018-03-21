@@ -48,8 +48,10 @@ public class SelfOperationTest {
         //全连接
         fullJoin(dr);
 
-        //移除临时表，清除画布
-//        clean(dr);
+        //清除画布
+        clean(dr);
+        //移除临时表
+        cleanTempTable(dr);
 
 //        quit(dr);
 
@@ -220,7 +222,7 @@ public class SelfOperationTest {
                 elements.add(e);
             }
         }
-        System.out.println(elements.size());
+//        System.out.println(elements.size());
         elements.get(0).click();
         try {
             Thread.sleep(500);
@@ -334,22 +336,46 @@ public class SelfOperationTest {
 
     public static void clean(WebDriver dr){
         try {
-            Thread.sleep(1000);
+            Thread.sleep(8000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         //移除画布
         //点击 移除
-        dr.findElement(By.className("delete")).click();
+        //鼠标点击 表
+        for (int i = 0; i < 2; i++){
+            if ( i > 0){
+                dr.findElement(By.className("rotatable")).click();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            //点击删除按钮
+            dr.findElement(By.className("delete")).click();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //点击确定
+            dr.findElement(By.xpath("//a[@class='layui-layer-btn0']")).click();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void cleanTempTable(WebDriver dr){
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //点击确定
-        dr.findElement(By.xpath("//a[@class='layui-layer-btn0']")).click();
-
 
         //清除临时表
         int size = dr.findElements(By.cssSelector(".analyse-common-dl.temptb >dd")).size();
@@ -362,7 +388,6 @@ public class SelfOperationTest {
             }
             dr.findElement(By.cssSelector(".temptb >dd >i")).click();
         }
-
     }
 
     public static boolean switchToWindow(String windowTitle,WebDriver dr){

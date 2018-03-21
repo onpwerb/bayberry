@@ -1,3 +1,5 @@
+package cn.hancloud.gaqbxt.test.service;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -5,6 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.test.context.ContextConfiguration;
+
+import javax.swing.text.html.CSS;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author linzengrui
@@ -14,9 +21,9 @@ import org.springframework.test.context.ContextConfiguration;
 @ContextConfiguration(locations = {"classpath:spring-core.xml"})
 public class SimpleOperationTest {
 
-    private static String loginUrl = "http://localhost:8080/web/query/login";      //登录页面
-    private static String searchUrl = "http://localhost:8080/web/query/search";     //登录成功页面
-    private static String indexUrl = "http://localhost:8080/web/analyse/index";
+    private static String loginUrl = "http://localhost:80/web/query/login";      //登录页面
+    private static String searchUrl = "http://localhost:80/web/query/search";     //登录成功页面
+    private static String indexUrl = "http://localhost:80/web/analyse/index";
 
     private static String path = "D:\\chromedriver_win32\\chromedriver.exe";       //驱动绝对路径
     private static String driver = "webdriver.chrome.driver";                       //使用谷歌驱动
@@ -78,6 +85,22 @@ public class SimpleOperationTest {
         }
     }
 
+    public static void click(WebDriver dr, String type, String name, int index){
+        if (type.equals(CssType.ID.getValue())){
+            dr.findElements(By.id(name)).get(index).click();
+        } else if (type.equals(CssType.NAME.getValue())){
+            dr.findElements(By.name(name)).get(index).click();
+        } else if (type.equals(CssType.CLASS.getValue())){
+            dr.findElements(By.className(name)).get(index).click();
+        } else if (type.equals(CssType.XPATH.getValue())){
+            dr.findElements(By.xpath(name)).get(index).click();
+        } else if (type.equals(CssType.LINKTEXT.getValue())){
+            dr.findElements(By.linkText(name)).get(index).click();
+        } else if (type.equals(CssType.CSSSELECTOR.getValue())){
+            dr.findElements(By.cssSelector(name)).get(index).click();
+        }
+    }
+
     //拖动
     public static void drag(WebDriver dr, String class1, String class2){
         WebElement target = dr.findElement(By.className(class1));
@@ -87,6 +110,24 @@ public class SimpleOperationTest {
                 .clickAndHold(target)
                 .moveToElement(dest)
                 .release(dest)
+                .perform();
+    }
+
+    public static void drag(WebDriver dr, String class1, String class2, int index){
+        WebElement target = dr.findElements(By.className(class1)).get(index);    //第 index+1 个表
+        WebElement dest = dr.findElement(By.className(class2));   //画布
+        new Actions(dr)
+                .moveToElement(target)
+                .clickAndHold(target)
+                .moveToElement(dest)
+                .release(dest)
+                .perform();
+    }
+
+    public static void drag(WebDriver dr, String class1, int index, int xOffset, int yOffset){
+        WebElement target = dr.findElements(By.className(class1)).get(index);
+        new Actions(dr)
+                .dragAndDropBy(target, xOffset, yOffset)
                 .perform();
     }
 
@@ -114,8 +155,23 @@ public class SimpleOperationTest {
         return dr.findElements(By.cssSelector(name)).size();
     }
 
+    //关联
+    public static void relate(WebDriver dr, int index1, int index2){        //表B 关联 表A
+        WebElement tableA = dr.findElements(By.cssSelector(".rotatable")).get(index1).findElement(By.className("inPorts"));
+        WebElement tableB = dr.findElements(By.cssSelector(".rotatable")).get(index2).findElement(By.className("outPorts"));
+        new Actions(dr)
+                .moveToElement(tableB)
+                .clickAndHold(tableB)
+                .moveToElement(tableA)
+                .release(tableA)
+                .perform();
+    }
+
     @Test
     public void test(){
+        String path = "D:\\chromedriver_win32\\chromedriver.exe";
+        String driver = "webdriver.chrome.driver";
+
         System.setProperty(driver, path);
         WebDriver dr = new ChromeDriver();
         dr.manage().window().maximize();
@@ -124,12 +180,23 @@ public class SimpleOperationTest {
         login(dr, loginUrl);
         //进入 数据建模
         index(dr, searchUrl);
+
         //选取表
-        analyse(dr, indexUrl);
+//        analyse(dr, indexUrl);
         //自运算
-        autocompete(dr);
-        //移除临时表，清除画布
+//        autocompete(dr);
+
+        //两个表关联
+        relateTable(dr, indexUrl);
+        //全连接
+        fullJoin(dr);
+
+        //清除画布
         clean(dr);
+        //移除临时表
+        cleanTempTable(dr);
+
+//        quit(dr);
     }
 
     public static void login(WebDriver dr, String url){
@@ -159,6 +226,76 @@ public class SimpleOperationTest {
         wait(500);
         dr.get(url);
         click(dr, "linkText", "数据建模");
+    }
+
+    public static void relateTable(WebDriver dr, String url){
+        wait(500);
+        dr.get(url);
+        click(dr, "class", "file-close"); //取第一个元素
+
+        // 拖动表 fulljoina 到画布
+        drag(dr, "a-c-dd", "hy-tab-content", 3);
+        wait(500);
+        // 拖动表 fulljoinb 到画布
+        drag(dr, "a-c-dd",  4, 500, 150);
+        wait(500);
+        // 表a 和 表b 关联
+        relate(dr, 0, 1);
+    }
+
+    public static void fullJoin(WebDriver dr){
+
+        wait(500);
+        //选择全连接
+        click(dr, "class", "tl-fulljoin");
+        wait(500);
+
+        //表A 选择表属性
+        click(dr, "class", "check-f", 0);
+        wait(500);
+        //点击全选按钮
+        click(dr, "xpath", "//a[@class='group-check']");
+        wait(500);
+        //点击确定按钮
+        click(dr, "xpath", "//a[@id='group-checkfs-bsave']");
+        wait(500);
+
+        //表B 选择表属性
+        click(dr, "class", "check-f", 1);
+        wait(500);
+        //点击全选按钮
+        click(dr, "xpath", "//a[@class='group-check']");
+        wait(500);
+        //点击确定按钮
+        click(dr, "xpath", "//a[@id='group-checkfs-bsave']");
+        wait(500);
+
+        //点击 第一个下拉框
+        click(dr, "xpath", "//span[@class='textbox-addon textbox-addon-right']", 0);
+        wait(500);
+        //鼠标选择 第一个 选项
+        List<WebElement> elements = new ArrayList<>();
+        String anObject = "id(id)";
+
+        for (WebElement e : dr.findElements(By.className("combobox-item"))){
+            if (e.getAttribute("innerHTML").equals(anObject)){
+                elements.add(e);
+            }
+        }
+        elements.get(0).click();
+
+        wait(500);
+
+        //点击 第三个下拉框
+        click(dr, "xpath", "//span[@class='textbox-addon textbox-addon-right']", 2);
+        wait(500);
+        //鼠标选择 第一个 选项
+        elements.get(1).click();
+        wait(500);
+
+        //点击 确定按钮
+        click(dr, "class", "tb-submit");
+
     }
 
     public static void analyse(WebDriver dr, String url){
@@ -199,15 +336,27 @@ public class SimpleOperationTest {
     }
 
     public static void clean(WebDriver dr){
-        wait(1000);
+        wait(8000);
 
         //移除画布
         //点击 移除
-        click(dr, "class", "delete");
-        wait(1000);
-        //点击确定
-        click(dr, "xpath", "//a[@class='layui-layer-btn0']");
+        //鼠标点击 表
+        for (int i = 0; i < 2; i++){
+            if ( i > 0){
+                click(dr, "class", "rotatable");
+                wait(1000);
+            }
+            //点击删除按钮
+            click(dr, "class", "delete");
+            wait(1000);
+            //点击确定
+            click(dr, "xpath", "//a[@class='layui-layer-btn0']");
+            wait(1000);
+        }
+    }
 
+    public static void cleanTempTable(WebDriver dr){
+        wait(1000);
         //清除临时表
         int size = sum(dr, ".analyse-common-dl.temptb >dd");
         for(int i = 0; i < size; i++){
