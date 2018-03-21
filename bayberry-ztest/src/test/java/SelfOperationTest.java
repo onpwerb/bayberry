@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,9 +20,9 @@ import java.util.Set;
 @ContextConfiguration(locations = {"classpath:spring-core.xml"})
 public class SelfOperationTest {
 
-    private static String loginUrl = "http://localhost:8080/web/query/login";      //登录页面
-    private static String searchUrl = "http://localhost:8080/web/query/search";     //登录成功页面
-    private static String indexUrl = "http://localhost:8080/web/analyse/index";
+    private static String loginUrl = "http://localhost:80/web/query/login";      //登录页面
+    private static String searchUrl = "http://localhost:80/web/query/search";     //登录成功页面
+    private static String indexUrl = "http://localhost:80/web/analyse/index";
 
     @Test
     public void test(){
@@ -35,12 +37,21 @@ public class SelfOperationTest {
         login(dr, loginUrl);
         //进入 数据建模
         index(dr, searchUrl);
+
         //选取表
-        analyse(dr, indexUrl);
+//        analyse(dr, indexUrl);
         //自运算
-        autocompete(dr);
-        //移除临时表，清除画布
+//        autocompete(dr);
+
+        //两个表关联
+        relate(dr, indexUrl);
+        //全连接
+        fullJoin(dr);
+
+        //清除画布
         clean(dr);
+        //移除临时表
+        cleanTempTable(dr);
 
 //        quit(dr);
 
@@ -84,6 +95,159 @@ public class SelfOperationTest {
         }
         dr.get(url);
         dr.findElement(By.linkText("数据建模")).click();
+    }
+
+    public static void relate(WebDriver dr, String url){
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        dr.get(url);
+        dr.findElement(By.className("file-close")).click(); //取第一个元素， 点击"开发专用"下拉框
+
+        // 拖动表 fulljoina 到画布
+        WebElement dest = dr.findElement(By.className("hy-tab-content"));   //画布
+        WebElement target = dr.findElements(By.className("a-c-dd")).get(3);         //第四个表
+        new Actions(dr)
+                .moveToElement(target)
+                .clickAndHold(target)
+                .moveToElement(dest)
+                .release(dest)
+                .perform();
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // 拖动表 fulljoinb 到画布
+        WebElement target2 = dr.findElements(By.className("a-c-dd")).get(4);         //第五个表
+        int xOffset = 500;
+        int yOffset = 150;
+        new Actions(dr)
+                .dragAndDropBy(target2, xOffset, yOffset)
+                .perform();
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // 表a 和 表b 关联
+        WebElement tableA = dr.findElements(By.cssSelector(".rotatable")).get(0).findElement(By.className("inPorts"));
+        WebElement tableB = dr.findElements(By.cssSelector(".rotatable")).get(1).findElement(By.className("outPorts"));
+        new Actions(dr)
+                .moveToElement(tableB)
+                .clickAndHold(tableB)
+                .moveToElement(tableA)
+                .release(tableA)
+                .perform();
+
+    }
+
+    public static void fullJoin(WebDriver dr){
+        //停顿
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //选择全连接
+        dr.findElement(By.className("tl-fulljoin")).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //表A 选择表属性
+        dr.findElements(By.className("check-f")).get(0).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //点击全选按钮
+        dr.findElement(By.xpath("//a[@class='group-check']")).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //点击确定按钮
+        dr.findElement(By.xpath("//a[@id='group-checkfs-bsave']")).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //表B 选择表属性
+        dr.findElements(By.className("check-f")).get(1).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //点击全选按钮
+        dr.findElement(By.xpath("//a[@class='group-check']")).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //点击确定按钮
+        dr.findElement(By.xpath("//a[@id='group-checkfs-bsave']")).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //点击 第一个下拉框
+        dr.findElements(By.xpath("//span[@class='textbox-addon textbox-addon-right']")).get(0).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //鼠标选择 第一个 选项
+        List<WebElement> elements = new ArrayList<>();
+        String anObject = "id(id)";
+        for (WebElement e : dr.findElements(By.className("combobox-item"))){
+            if (e.getAttribute("innerHTML").equals(anObject)){
+                elements.add(e);
+            }
+        }
+//        System.out.println(elements.size());
+        elements.get(0).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //点击 第三个下拉框
+        dr.findElements(By.xpath("//span[@class='textbox-addon textbox-addon-right']")).get(2).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //鼠标选择 第一个 选项
+        elements.get(1).click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //点击 确定按钮
+        dr.findElement(By.className("tb-submit")).click();
+
     }
 
     public static void analyse(WebDriver dr, String url){
@@ -172,22 +336,46 @@ public class SelfOperationTest {
 
     public static void clean(WebDriver dr){
         try {
-            Thread.sleep(1000);
+            Thread.sleep(8000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         //移除画布
         //点击 移除
-        dr.findElement(By.className("delete")).click();
+        //鼠标点击 表
+        for (int i = 0; i < 2; i++){
+            if ( i > 0){
+                dr.findElement(By.className("rotatable")).click();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            //点击删除按钮
+            dr.findElement(By.className("delete")).click();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //点击确定
+            dr.findElement(By.xpath("//a[@class='layui-layer-btn0']")).click();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void cleanTempTable(WebDriver dr){
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //点击确定
-        dr.findElement(By.xpath("//a[@class='layui-layer-btn0']")).click();
-
 
         //清除临时表
         int size = dr.findElements(By.cssSelector(".analyse-common-dl.temptb >dd")).size();
@@ -200,7 +388,6 @@ public class SelfOperationTest {
             }
             dr.findElement(By.cssSelector(".temptb >dd >i")).click();
         }
-
     }
 
     public static boolean switchToWindow(String windowTitle,WebDriver dr){
