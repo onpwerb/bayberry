@@ -38,20 +38,28 @@ public class SelfOperationTest {
         //进入 数据建模
         index(dr, searchUrl);
 
+        //导入
+        importTable(dr, indexUrl);
+
+
+
         //选取表
 //        analyse(dr, indexUrl);
         //自运算
 //        autocompete(dr);
 
+
+
         //两个表关联
-        relate(dr, indexUrl);
+//        relate(dr, indexUrl);
         //全连接
-        fullJoin(dr);
+//        fullJoin(dr);
+
 
         //清除画布
-        clean(dr);
+//        clean(dr);
         //移除临时表
-        cleanTempTable(dr);
+//        cleanTempTable(dr);
 
 //        quit(dr);
 
@@ -97,6 +105,30 @@ public class SelfOperationTest {
         dr.findElement(By.linkText("数据建模")).click();
     }
 
+    public static void importTable(WebDriver dr, String url){
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        dr.get(url);
+
+        // file upload
+        dr.findElement(By.className("fileupload")).sendKeys("C:\\Users\\11385\\Desktop\\test.xlsx");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        dr.findElement(By.className("im-import")).click();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void relate(WebDriver dr, String url){
         try {
             Thread.sleep(500);
@@ -120,6 +152,7 @@ public class SelfOperationTest {
             Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
+
         }
 
         // 拖动表 fulljoinb 到画布
