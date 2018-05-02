@@ -181,20 +181,23 @@ public class SimpleOperationTest {
         //进入 数据建模
         index(dr, searchUrl);
 
+        //导入
+        importTable(dr, indexUrl);
+
         //选取表
 //        analyse(dr, indexUrl);
         //自运算
 //        autocompete(dr);
 
         //两个表关联
-        relateTable(dr, indexUrl);
+//        relateTable(dr, indexUrl);
         //全连接
-        fullJoin(dr);
+//        fullJoin(dr);
 
         //清除画布
-        clean(dr);
+//        clean(dr);
         //移除临时表
-        cleanTempTable(dr);
+//        cleanTempTable(dr);
 
 //        quit(dr);
     }
@@ -226,6 +229,18 @@ public class SimpleOperationTest {
         wait(500);
         dr.get(url);
         click(dr, "linkText", "数据建模");
+    }
+
+    public static void importTable(WebDriver dr, String url){
+        wait(500);
+        dr.get(url);
+
+        // file upload
+        input(dr, "class", "fileupload", "C:\\Users\\11385\\Desktop\\test.xlsx");
+        wait(1000);
+
+        click(dr, "class", "im-import");
+        wait(3000);
     }
 
     public static void relateTable(WebDriver dr, String url){
