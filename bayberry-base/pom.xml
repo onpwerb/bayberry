@@ -19,6 +19,13 @@
             <version>${spring.boot.version}</version>
         </dependency>
 
+        <!-- logback condition 动态条件选择-->
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>3.0.11</version>
+        </dependency>
+
         <!-- commons -->
         <!--<dependency>-->
             <!--<groupId>org.apache.commons</groupId>-->

@@ -1,0 +1,6 @@
+﻿${AnsiColor.RED}
+
+
+${AnsiColor.BRIGHT_BLACK}
+${AnsiColor.BLUE}::  ::${AnsiColor.BRIGHT_BLACK}
+${AnsiColor.BLUE}:: MAGIC CUBE PLATFORM :: ${spring.application.name} : ${AnsiColor.RED} ${AnsiColor.BLUE} :: Running springboot ${spring-boot.version} :: ${AnsiColor.WHITE}
