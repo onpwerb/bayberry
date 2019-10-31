@@ -1,6 +1,5 @@
 package cn.zerry.kotlin
 
-import com.sun.jna.IntegerType
 import org.apache.http.util.Args
 import java.beans.PropertyChangeListener
 import java.beans.PropertyChangeSupport

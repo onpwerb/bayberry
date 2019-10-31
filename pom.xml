@@ -17,7 +17,6 @@
         <module>bayberry-alarm</module>
         <module>bayberry-admin</module>
         <module>bayberry-zpush</module>
-        <module>bayberry-ztest</module>
         <module>bayberry-ui</module>
         <module>bayberry-cms</module>
         <module>bayberry-loganalysis</module>
@@ -28,6 +27,8 @@
         <module>bayberry-datamodeling</module>
         <module>bayberry-zshop</module>
         <module>bayberry-zcloud</module>
+        <module>bayberry-ztest</module>
+        <module>bayberry-example</module>
     </modules>
 
     <properties>
@@ -35,6 +36,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>1.8</java.version>
+        <!-- 与上面version的内容保持一致 -->
+        <module.version>1.0.0</module.version>
 
         <spring.boot.version>2.0.8.RELEASE</spring.boot.version>
         <spring.cloud.version>Finchley.SR2</spring.cloud.version>

@@ -23,4 +23,5 @@ bayberry-zpush/dependency-reduced-pom.xml
 bayberry-zshop/target/
 bayberry-zcloud/target/
 bayberry-zcloud/bayberry-zcloud-eureka/target/
-/README.md
+bayberry-test/target/
+bayberry-example/target/

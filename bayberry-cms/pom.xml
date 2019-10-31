@@ -12,11 +12,11 @@
     <artifactId>bayberry-cms</artifactId>
 
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>cn.zerry</groupId>-->
-            <!--<artifactId>bayberry-base</artifactId>-->
-            <!--<version>1.0.0</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>cn.zerry</groupId>
+            <artifactId>bayberry-base</artifactId>
+            <version>${module.version}</version>
+        </dependency>
 
         <!-- ... other dependency elements ... -->
         <dependency>

@@ -21,11 +21,11 @@
 
     <dependencies>
         <!-- module -->
-        <!--<dependency>-->
-            <!--<groupId>cn.zerry</groupId>-->
-            <!--<artifactId>bayberry-base</artifactId>-->
-            <!--<version>1.0.0</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>cn.zerry</groupId>
+            <artifactId>bayberry-base</artifactId>
+            <version>${module.version}</version>
+        </dependency>
         <!-- spring boot web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
