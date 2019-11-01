@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>cn.zerry</groupId>
+        <artifactId>bayberry</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>bayberry-cloud</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.zerry</groupId>
+            <artifactId>bayberry-common</artifactId>
+            <version>${module.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.zerry</groupId>
+            <artifactId>bayberry-db</artifactId>
+            <version>${module.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.zerry</groupId>
+            <artifactId>bayberry-event</artifactId>
+            <version>${module.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.zerry</groupId>
+            <artifactId>bayberry-boot</artifactId>
+            <version>${module.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.zerry</groupId>
+            <artifactId>bayberry-feign</artifactId>
+            <version>${module.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.zerry</groupId>
+            <artifactId>bayberry-apollo</artifactId>
+            <version>${module.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.zerry</groupId>
+            <artifactId>bayberry-swagger</artifactId>
+            <version>${module.version}</version>
+        </dependency>
+
+        <!-- eureka client-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <!-- 熔断器 hystrix-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+
+        <!-- 其他-->
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-context</artifactId>
+        </dependency>
+
+
+        <!-- redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.lettuce</groupId>
+                    <artifactId>lettuce-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+
+    </dependencies>
+
+
+</project>

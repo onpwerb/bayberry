@@ -14,7 +14,12 @@
     <dependencies>
         <dependency>
             <groupId>cn.zerry</groupId>
-            <artifactId>bayberry-base</artifactId>
+            <artifactId>bayberry-common</artifactId>
+            <version>${module.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.zerry</groupId>
+            <artifactId>bayberry-db</artifactId>
             <version>${module.version}</version>
         </dependency>
 
