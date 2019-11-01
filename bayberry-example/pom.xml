@@ -12,16 +12,37 @@
     <artifactId>bayberry-example</artifactId>
 
     <dependencies>
+        <!--<dependency>-->
+            <!--<groupId>cn.zerry</groupId>-->
+            <!--<artifactId>bayberry-common</artifactId>-->
+            <!--<version>${module.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>cn.zerry</groupId>-->
+            <!--<artifactId>bayberry-db</artifactId>-->
+            <!--<version>${module.version}</version>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>cn.zerry</groupId>
-            <artifactId>bayberry-common</artifactId>
+            <artifactId>bayberry-event</artifactId>
             <version>${module.version}</version>
         </dependency>
+
+        <!-- 注解-->
         <dependency>
-            <groupId>cn.zerry</groupId>
-            <artifactId>bayberry-db</artifactId>
-            <version>${module.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+
+        <!-- 定时任务-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+
+
+
 
 
     </dependencies>

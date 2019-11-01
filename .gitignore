@@ -9,13 +9,20 @@ bayberry-alarm/target/
 bayberry-alarm/bayberry-alarm-web/target/
 bayberry-animation/target/
 bayberry-api/target/
+bayberry-apollo/target/
 bayberry-base/target/
+bayberry-cloud/target/
 bayberry-cms/target/
 bayberry-common/target/
 bayberry-config/target/
 bayberry-datamodeling/target/
+bayberry-db/target/
+bayberry-event/target/
+bayberry-example/target/
+bayberry-feign/target/
 bayberry-loganalysis/target/
 bayberry-search/target/
+bayberry-swagger/target/
 bayberry-sync/target/
 bayberry-ui/target/
 bayberry-zpush/target/
@@ -24,4 +31,3 @@ bayberry-zshop/target/
 bayberry-zcloud/target/
 bayberry-zcloud/bayberry-zcloud-eureka/target/
 bayberry-test/target/
-bayberry-example/target/
