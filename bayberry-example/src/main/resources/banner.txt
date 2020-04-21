@@ -1,6 +1,10 @@
 ﻿${AnsiColor.RED}
-
-
+___.                 ___.
+\_ |__ _____  ___.__.\_ |__   __________________ ___.__.
+ | __ \\__  \<   |  | | __ \_/ __ \_  __ \_  __ <   |  |
+ | \_\ \/ __ \\___  | | \_\ \  ___/|  | \/|  | \/\___  |
+ |___  (____  / ____| |___  /\___  >__|   |__|   / ____|
+     \/     \/\/          \/     \/              \/
 ${AnsiColor.BRIGHT_BLACK}
-${AnsiColor.BLUE}::  ::${AnsiColor.BRIGHT_BLACK}
-${AnsiColor.BLUE}:: MAGIC CUBE PLATFORM :: ${spring.application.name} : ${AnsiColor.RED} ${AnsiColor.BLUE} :: Running springboot ${spring-boot.version} :: ${AnsiColor.WHITE}
+${AnsiColor.BLUE}:: ALFRED ::${AnsiColor.BRIGHT_BLACK}
+${AnsiColor.BLUE}:: ZERRY :: ${spring.application.name} : ${AnsiColor.RED} ${AnsiColor.BLUE} :: Running springboot ${spring-boot.version} :: ${AnsiColor.WHITE}
