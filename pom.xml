@@ -36,6 +36,7 @@
         <module>bayberry-animation</module>
         <module>bayberry-zshop</module>
         <module>bayberry-zcloud</module>
+        <module>bayberry-zchat</module>
 
         <module>bayberry-ztest</module>
         <module>bayberry-example</module>
